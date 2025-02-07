@@ -2,33 +2,52 @@ package com.example.mp3
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.mp3.ui.theme.MusicPlayerTheme  // 테마 확인
+import com.example.mp3.ui.theme.MusicPlayerTheme
 
 class MainActivity : ComponentActivity() {
+
     private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 음악 파일 res/raw/sample_music.mp3를 추가했는지 확인하세요!
-        mediaPlayer = MediaPlayer.create(this, R.raw.sample_music)
+        // MediaPlayer 초기화
+        mediaPlayer = MediaPlayer.create(this, R.raw.song1)
+        mediaPlayer.setVolume(1.0f, 1.0f)  // 볼륨 최대 설정
+        mediaPlayer.isLooping = false      // 반복 재생 설정 (필요 시)
+
+        // MediaPlayer 에러 리스너 추가
+        mediaPlayer.setOnErrorListener { mp, what, extra ->
+            Log.e("MainActivity", "MediaPlayer Error - What: $what, Extra: $extra")
+            true
+        }
+
+        // MediaPlayer 상태 확인 로그 추가
+        if (mediaPlayer != null) {
+            Log.d("MainActivity", "MediaPlayer initialized successfully")
+        } else {
+            Log.e("MainActivity", "MediaPlayer initialization failed")
+        }
+
+        // 재생 시작
+        mediaPlayer.start()
+        if (mediaPlayer.isPlaying) {
+            Log.d("MainActivity", "Media is playing")
+        } else {
+            Log.e("MainActivity", "Media is NOT playing")
+        }
 
         setContent {
             MusicPlayerTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MusicPlayerScreen(mediaPlayer)  // MusicPlayerScreen을 호출해야 음악 플레이어 UI가 표시됩니다.
-                }
+                MusicPlayerScreen(
+                    playlist = listOf(R.raw.song1, R.raw.song2, R.raw.song3, R.raw.song4, R.raw.song5, R.raw.song6 ),  // 여러 곡 추가
+                    mediaPlayer = mediaPlayer,
+                    onNext = { /* 다음 곡 로직 */ },
+                    onPrevious = { /* 이전 곡 로직 */ }
+                )
             }
         }
     }
@@ -36,52 +55,5 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
-    }
-}
-
-@Composable
-fun MusicPlayerScreen(mediaPlayer: MediaPlayer) {
-    var isPlaying by remember { mutableStateOf(false) }
-    var currentPosition by remember { mutableStateOf(0f) }
-    val duration = mediaPlayer.duration.toFloat()
-
-    // 음악 재생 중 SeekBar 업데이트
-    LaunchedEffect(isPlaying) {
-        while (isPlaying) {
-            currentPosition = mediaPlayer.currentPosition.toFloat()
-            kotlinx.coroutines.delay(1000)
-        }
-    }
-
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Play/Pause 버튼
-        Button(onClick = {
-            if (mediaPlayer.isPlaying) {
-                mediaPlayer.pause()
-                isPlaying = false
-            } else {
-                mediaPlayer.start()
-                isPlaying = true
-            }
-        }) {
-            Text(if (isPlaying) "Pause Music" else "Play Music")
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // SeekBar로 음악 재생 위치 조절
-        Slider(
-            value = currentPosition,
-            onValueChange = {
-                mediaPlayer.seekTo(it.toInt())
-                currentPosition = it
-            },
-            valueRange = 0f..duration,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
