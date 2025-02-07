@@ -1,0 +1,43 @@
+# macOS 시스템 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Android Studio 및 IntelliJ IDEA 관련
+.idea/
+*.iml
+.gradle/
+local.properties
+
+# 빌드 파일
+/build/
+*/build/
+
+# 테스트 결과
+*.log
+*.tmp
+*.temp
+*.swp
+
+# APK, AAB 빌드 결과물
+*.apk
+*.aab
+
+# 서명 키스토어 (보안상의 이유로 포함 금지)
+*.jks
+*.keystore
+
+# 자바 컴파일 파일
+*.class
+
+# NDK 빌드 아티팩트
+obj/
+
+# Visual Studio Code 설정 (VSCode를 사용하는 경우)
+.vscode/
+
+# 캐시 파일
+.cxx/
+
