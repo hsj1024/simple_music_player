@@ -28,6 +28,8 @@ local.properties
 # 서명 키스토어 (보안상의 이유로 포함 금지)
 *.jks
 *.keystore
+app/google-services.json
+
 
 # 자바 컴파일 파일
 *.class
@@ -35,8 +37,9 @@ local.properties
 # NDK 빌드 아티팩트
 obj/
 
-# Visual Studio Code 설정 (VSCode를 사용하는 경우)
+# Visual Studio Code 설정
 .vscode/
+
 
 # 캐시 파일
 .cxx/
