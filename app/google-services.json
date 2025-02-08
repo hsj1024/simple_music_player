@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849576017854",
+    "project_id": "music-player-sj",
+    "storage_bucket": "music-player-sj.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849576017854:android:a76a7454748bf0b14603ef",
+        "android_client_info": {
+          "package_name": "com.example.mp3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZizUyGRuRe57lAYAhtm836jANkVD5jtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
