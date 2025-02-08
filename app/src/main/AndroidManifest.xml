@@ -1,38 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mp3">
 
-    <!-- 외부 저장소 읽기 권한 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <!-- 포그라운드 서비스 권한 (Android 9 이상 필요) -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <!-- 미디어 재생을 위한 포그라운드 서비스 권한 (Android 14 이상 필요) -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-
+    <!-- 네트워크 권한 추가 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
-        android:label="Music Player"
-        android:theme="@style/Theme.Mp3PlayerDemo">
+        android:icon="@mipmap/sj_logo"
+        android:label="SeoJeong's Music Player"
+        android:theme="@style/Theme.Mp3PlayerDemo"
+        android:enableOnBackInvokedCallback="true"
+        android:usesCleartextTraffic="true">
 
-        <!-- MainActivity 등록 -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <!-- SplashActivity를 런처로 설정 -->
+    <activity
+        android:name=".SplashActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
-        <!-- MusicService 등록 -->
-        <service
-            android:name=".MusicService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="mediaPlayback" />
-
+    <!-- MainActivity (Splash 후 이동) -->
+    <activity
+        android:name=".MainActivity"
+        android:exported="true" />
     </application>
 
 </manifest>

@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    // Add the dependency for the Google services Gradle plugin
+    id("com.google.gms.google-services") version "4.4.2" apply false
+
 }
 
 android {
@@ -59,6 +62,25 @@ dependencies {
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.room:room-runtime:2.5.0")  // 최신 Room 버전으로 업데이트
+    implementation("androidx.navigation:navigation-compose:2.7.0") // Compose Navigation 추가
+
+    // Material3 라이브러리
+    implementation("androidx.compose.material3:material3:1.1.0")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation ("androidx.compose.ui:ui-text-google-fonts:1.3.1")  // 폰트 관련 라이브러리
+
+    implementation ("androidx.compose.foundation:foundation:1.4.0")  // Compose Foundation
+    implementation ("androidx.compose.material3:material3:1.1.0")    // Material 3
+    implementation ("androidx.compose.ui:ui:1.4.0")                  // Compose UI
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
 
     // 테스트 의존성
     testImplementation(libs.junit)
