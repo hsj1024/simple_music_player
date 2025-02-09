@@ -8,7 +8,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
-import androidx.core.app.NotificationCompat  // Import 추가
+import androidx.core.app.NotificationCompat
 
 class MusicService : Service() {
 
