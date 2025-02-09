@@ -19,7 +19,7 @@ private val CustomFontFamily = FontFamily(Font(R.font.custom_font))  // 폰트 �
 private val AppTypography = Typography(
     headlineLarge = TextStyle(
         fontFamily = CustomFontFamily,
-        fontSize = 40.sp
+        fontSize = 30.sp
     ),
     headlineSmall = TextStyle(  // 리스트 제목
         fontFamily = CustomFontFamily,
